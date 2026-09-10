@@ -1,1 +1,1 @@
-# UofG-IBM-Qiskit-Fall-Fest-2025
+# UofG-IBM-Qiskit-Fall-Fest
