@@ -1,0 +1,1489 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>University of Glasgow Qiskit Fall Fest</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        /* Add this inside the <style> tags in your <head> */
+
+        /* Color Variables */
+        /* Color Variables */
+        :root {
+            --background-dark: #1D1F2B;
+            --background-light: #a56eff;
+            /* ADD THIS NEW LINE */
+            --primary-purple: #a56eff;
+            --text-light: #f8f9fa;
+            --text-muted: #adb5bd;
+        }
+
+        /* General Body Styles */
+        body {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+        }
+
+        /* Custom Heading Styles */
+        h1,
+        h2,
+        h3 {
+            color: var(--text-light);
+            font-weight: bold;
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--primary-purple);
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 3rem;
+            /* Adds space below the heading */
+        }
+
+        /* Make sections have enough top padding so the fixed nav doesn't cover the title */
+        section {
+            padding-top: 80px;
+            padding-bottom: 40px;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* =================================== */
+        /* --- FINAL, ROBUST NAVBAR STYLES --- */
+        /* =================================== */
+
+        /* Main navbar container */
+        .navbar {
+            position: relative;
+            z-index: 9999;
+            /* Ensures it's on top of all content */
+            min-height: 70px;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            background-color: var(--background-dark);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* The container for the text and logos */
+        .navbar-brand {
+            min-width: 0;
+            /* Allows the container to shrink */
+        }
+
+        /* Controls the text part */
+        .navbar-brand span {
+            font-weight: bold;
+            color: var(--text-light);
+            white-space: nowrap;
+            /* Prevents the text itself from wrapping */
+        }
+
+        /* Controls BOTH logos with a single, consistent rule */
+        .nav-logo {
+            height: 40px;
+            /* A sensible height for a 70px tall bar */
+            width: auto;
+            flex-shrink: 0;
+            /* Prevents logos from being distorted */
+        }
+
+        /* =================================== */
+        /* --- FORCED DROPDOWN MENU FIX --- */
+        /* =================================== */
+
+        /* This forces the menu to be visible when the hamburger is clicked */
+        .navbar-collapse.collapse.show {
+            display: block !important;
+        }
+
+        /* This ensures the clickable area of the button is not obstructed */
+        .navbar-toggler {
+            z-index: 2;
+            /* Sits above the pseudo-element */
+        }
+
+
+
+        /* --- MOBILE STYLES FOR NAV BAR --- */
+
+        /* Targets tablets and smaller devices */
+        @media (max-width: 991.98px) {
+
+            /* On mobile, use the split background */
+            .navbar::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 60%;
+                /* Adjusted width for the long text */
+                height: 100%;
+                background-color: var(--background-light);
+                z-index: 0;
+            }
+
+            .navbar>.container {
+                position: relative;
+                z-index: 1;
+            }
+
+            .navbar-brand span {
+                color: #212529;
+                /* Make text dark on the light background */
+            }
+
+            /* --- NEWLY ADDED STYLES FOR COLLAPSED MENU --- */
+
+            /* Style the container that wraps the menu links */
+            .navbar-collapse {
+                background-color: var(--background-dark);
+                padding: 1rem;
+                border-radius: 0 0 15px 15px;
+                /* Rounded bottom corners */
+                margin-top: 0.5rem;
+                /* Adds a little space below the main bar */
+            }
+
+            /* Style the individual links inside the collapsed menu */
+            .navbar-nav .nav-link {
+                color: var(--text-light);
+                padding: 0.75rem 0;
+                text-align: center;
+            }
+
+            .navbar-nav .nav-link:hover {
+                color: var(--primary-purple);
+            }
+
+            /* --- END OF NEW STYLES --- */
+        }
+
+        /* Targets only very small phone screens */
+        @media (max-width: 576px) {
+
+            /* HIDE the long text to create space */
+            .navbar-brand span {
+                display: none;
+            }
+
+            /* Remove the split background when text is hidden */
+            .navbar::before {
+                display: none;
+            }
+        }
+
+        /* Custom Button Style */
+        .btn-register {
+            background-color: var(--primary-purple);
+            color: white;
+            font-weight: bold;
+            padding: 8px 20px;
+            border-radius: 50px;
+            /* Gives it a modern pill shape */
+            transition: all 0.3s ease;
+        }
+
+        .btn-register:hover {
+            background-color: white;
+            color: var(--primary-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hero Section Styles */
+        /* Hero Section Styles (Updated for Background Image) */
+        #hero {
+            position: relative;
+            /* Needed for the overlay */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+
+            /* --- BACKGROUND IMAGE AND PARALLAX EFFECT --- */
+            /* IMPORTANT: Change 'hero-background.jpg' to your image file name */
+            background-image: url('images/2_Fall Fest_LinkedinTwitter_Extension.png');
+            background-attachment: fixed;
+            /* This creates the parallax effect */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        /* This pseudo-element creates the dark overlay and the blur */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(29, 31, 43, 0.6);
+            /* Semi-transparent dark overlay */
+            backdrop-filter: blur(1.5px);
+            /* This creates the blur effect! */
+            -webkit-backdrop-filter: blur(5px);
+            /* For Safari support */
+        }
+
+        /* This ensures your text and logos appear ON TOP of the overlay */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Styling for the logos (can be the same as before) */
+        .hero-logos img {
+            max-height: 250px;
+            width: auto;
+            margin: 0 10px;
+        }
+
+        /* Committee Section Styles */
+        .committee-card {
+            position: relative;
+            background-color: #2c2f40;
+            /* A slightly lighter dark shade */
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border: 1px solid #3a3e5d;
+            transition: all 0.3s ease;
+        }
+
+        .committee-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-purple);
+        }
+
+        .committee-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            /* Makes the image a perfect square */
+            object-fit: cover;
+            /* Ensures the image covers the area without distortion */
+        }
+
+        .committee-card .card-body {
+            padding: 1.5rem;
+        }
+
+        .committee-card .card-title {
+            color: var(--text-light);
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .committee-card .card-role {
+            color: var(--primary-purple);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .linkedin-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Cover the entire card initially, we will adjust */
+
+            /* Make the icon centered */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            /* Style the overlay and icon */
+            background-color: rgba(29, 31, 43, 0.7);
+            /* Semi-transparent dark overlay */
+            color: white;
+            font-size: 3rem;
+            /* Size of the LinkedIn icon */
+
+            /* Hide it by default */
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* This targets the photo part of the card, not the text part */
+        .committee-card .linkedin-overlay {
+            height: 60%;
+            /* Or whatever percentage covers just the image */
+            border-radius: 15px 15px 0 0;
+        }
+
+        .committee-card-link:hover .linkedin-overlay {
+            opacity: 1;
+            /* Show it on hover */
+        }
+
+        /* Schedule Section Styles */
+        .schedule-day-column {
+            margin-bottom: 3rem;
+        }
+
+        .schedule-list {
+            max-width: 800px;
+            margin: 0 auto;
+            /* Center the list within the container */
+        }
+
+        .schedule-item {
+            padding: 1.5rem 0;
+        }
+
+        .schedule-time {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        .schedule-title {
+            color: var(--text-light);
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+
+        .schedule-details {
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        .schedule-divider {
+            border-top: 1px solid #3a3e5d;
+            opacity: 1;
+        }
+
+        /* Remove the last divider for a cleaner look */
+        .schedule-list .schedule-divider:last-of-type {
+            display: none;
+        }
+
+        /* Venue Section Styles */
+        .venue-details h3 {
+            color: var(--primary-purple);
+            font-weight: bold;
+        }
+
+        .venue-address {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            /* This makes the corners of the map rounded */
+            border: 1px solid #3a3e5d;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 400px;
+            display: block;
+            /* Removes any extra space below the iframe */
+
+            /* This is a trick to make the map match your dark theme! */
+            filter: invert(100%) hue-rotate(180deg) brightness(1.2);
+        }
+
+        /* Sponsors Section Styles */
+        .scroller {
+            max-width: 900px;
+            margin: auto;
+            overflow: hidden;
+            /* This creates the fade-out effect on the edges */
+            -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+            mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+        }
+
+        .scroller-inner {
+            display: flex;
+            gap: 2rem;
+            /* The space between logos */
+            width: max-content;
+            /* Prevents logos from wrapping */
+            /* Animation definition */
+            animation: scroll 15s linear infinite;
+        }
+
+        /* The animation keyframes */
+        @keyframes scroll {
+            to {
+                transform: translateX(calc(-50% - 1rem));
+                /* The 1rem matches half the gap */
+            }
+        }
+
+        /* Styling for the logos */
+        .scroller-inner img {
+            height: 60px;
+            /* Adjust height as needed */
+            width: auto;
+            filter: grayscale(100%) opacity(0.8);
+            transition: all 0.3s ease;
+        }
+
+        .scroller-inner img:hover {
+            filter: grayscale(0%) opacity(1);
+            transform: scale(1.1);
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #161821;
+            /* A slightly different dark for contrast */
+            border-top: 1px solid #3a3e5d;
+        }
+
+        footer h5 {
+            color: var(--primary-purple);
+            font-weight: bold;
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--text-light);
+        }
+
+        .social-icon {
+            font-size: 1.5rem;
+            margin-left: 15px;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: var(--primary-purple);
+        }
+
+        /* Back to Top Button Styles */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-purple);
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.4s;
+            z-index: 999;
+        }
+
+        .back-to-top:hover {
+            background-color: white;
+            color: var(--primary-purple);
+        }
+
+        /* Event Info Section Styles */
+        #event-info {
+            margin-top: -100px;
+            /* Pulls the card up to overlap the hero section */
+            position: relative;
+            z-index: 5;
+            /* Ensures it sits above other elements */
+        }
+
+        .event-info-card {
+            background-color: var(--background-light);
+            /* Light background */
+            color: #212529;
+            /* Dark text for readability on light background */
+            border-radius: 15px;
+            max-width: 700px;
+            /* Controls the width of the card */
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            /* Soft shadow */
+            border: none;
+            /* Remove default card border */
+        }
+
+        /* Speakers Section Styles */
+        .speaker-card {
+            background-color: #2c2f40;
+            /* A slightly lighter dark shade for contrast */
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #3a3e5d;
+            transition: all 0.3s ease;
+            height: 100%;
+            /* Ensures all cards in a row are the same height */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .speaker-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary-purple);
+        }
+
+        .speaker-img-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            /* Wider image aspect ratio than committee */
+            overflow: hidden;
+        }
+
+        .speaker-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .speaker-card:hover .speaker-img {
+            transform: scale(1.05);
+            /* Slight zoom on hover */
+        }
+
+        .speaker-card .card-body {
+            padding: 1.5rem;
+            text-align: left;
+            flex-grow: 1;
+            /* Allows content to expand and fill space */
+        }
+
+        .speaker-name {
+            color: var(--text-light);
+            font-size: 1.4rem;
+            margin-bottom: 0.25rem;
+            font-weight: bold;
+        }
+
+        .speaker-title {
+            color: var(--primary-purple);
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .speaker-bio {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+            /* Ensures bio takes up available space */
+        }
+
+        .speaker-link-btn {
+            display: inline-flex;
+            /* Allows text and logo to sit side-by-side */
+            align-items: center;
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            border: 1px solid var(--primary-purple);
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .speaker-link-btn:hover {
+            background-color: var(--primary-purple);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .speaker-link-btn .link-logo {
+            height: 20px;
+            /* Adjust logo size in buttons */
+            margin-right: 8px;
+            filter: invert(0%);
+            /* Makes dark logos visible on dark background */
+        }
+
+        .speaker-link-btn:hover .link-logo {
+            filter: invert(100%);
+            /* Makes light logos visible on primary purple background */
+        }
+
+        .event-info-card .card-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+
+        /* Styling for the main hero section register button */
+        .btn-register-main {
+            background-color: #78a9ff;
+            /* A vibrant pink/magenta */
+            color: white;
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: 2px solid #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .btn-register-main:hover {
+            background-color: transparent;
+            color: #ff33a8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* =================================== */
+        /* --- MOBILE OPTIMIZATION STYLES --- */
+        /* =================================== */
+
+        /* This targets all screens smaller than 992px (tablets and phones) */
+        @media (max-width: 991.98px) {
+
+            /* 1. Fix the Navigation Bar (Keep these styles) */
+            .navbar::before {
+                display: none;
+            }
+
+            .navbar {
+                background-color: var(--background-dark) !important;
+            }
+
+            .navbar-brand span {
+                color: var(--text-light) !important;
+            }
+
+
+
+            /* === NEW & FINAL HERO SECTION FIXES === */
+
+            /* 2. Add padding and prevent any horizontal overflow as a failsafe */
+            .hero-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                overflow-x: hidden;
+                /* Prevents anything from breaking out */
+            }
+
+            /* 3. Allow logos to stack on top of each other on small screens */
+            .hero-logos {
+                display: flex;
+                flex-wrap: wrap;
+                /* This is the key change! */
+                justify-content: center;
+                align-items: center;
+            }
+
+            /* 4. Control logo size more effectively with max-width */
+            .hero-logos img {
+                max-width: 45%;
+                /* Limits width to a percentage of the screen */
+                height: auto;
+                /* Maintains aspect ratio */
+                max-height: 80px !important;
+            }
+
+            /* 5. Force all text to wrap correctly */
+            #hero h1,
+            #hero p {
+                overflow-wrap: break-word;
+                word-break: break-word;
+            }
+
+            #hero h1 {
+                font-size: 2.2rem;
+            }
+
+            /* === END OF NEW HERO FIXES === */
+
+            /* 6. Center-align other sections (Keep these styles) */
+            .schedule-item .text-md-start {
+                text-align: center !important;
+            }
+
+            .schedule-time {
+                margin-bottom: 0.5rem;
+            }
+
+            .venue-details {
+                text-align: center !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <span class="navbar-brand-text me-2">UofG IBM Qiskit Fall Fest</span>
+                <img src="images/UoG_keyline.png" alt="University Logo" class="nav-logo">
+                <img src="images/Qiskit.svg" alt="IBM Logo" class="nav-logo ms-2">
+            </a>
+
+            <button class="navbar-toggler" type="button" id="navbar-toggler-button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#committee">Committee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#schedule">Schedule</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sponsors">Sponsors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#venue">Venue</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-register" href="https://forms.gle/1bHxE6pX9LNh7KuB9"
+                            target="_blank">Register</a>
+                    </li> <li class="nav-item ms-lg-3">
+                        <a class="btn btn-register" href="https://events.teams.microsoft.com/event/dbe317e2-811d-4d2a-a2c5-63deb00a17b2@6e725c29-763a-4f50-81f2-2e254f0133c8"
+                            target="_blank">Virtual Attendance</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    <header id="hero">
+        <div class="hero-content text-center">
+            <div class="hero-logos mb-4">
+                <img src="images/IBM_Qubit.svg" alt="IBM Qiskit Logo">
+                <img src="images/IBM_Quantum.png" alt="IBM Qiskit Logo">
+            </div>
+            <h1 class="display-2">University of Glasgow IBM Qiskit Fall Fest</h1>
+            <p class="lead" style="color: var(--text-muted);">Welcome to the Qiskit Fall Fest at the UofG! We're so
+                excited to have you all here.
+                Qiskit Fall Fest is a collection of quantum computing events on college campuses and institutions around
+                the world, supported and endorsed by IBM Quantum.</p>
+            <p class="mt-4">
+                <a href="https://forms.gle/1bHxE6pX9LNh7KuB9" target="_blank"
+                    class="btn btn-register btn-lg">Register</a>
+
+            </p>
+        </div>
+    </header>
+
+    <section id="textbox" class="py-5">
+        <div class="container">
+            <div class="card event-info-card mx-auto">
+                <div class="card-body text-center">
+                    <h3 class="card-title mb-3" style="color: var(--background-dark);">Immerse Yourself in the World of
+                        Quantum Computing</h3>
+                    <p class="card-text">
+                        Join us for a unique workshop co-hosted by IBM Quantum, where early and learning are our top
+                        priorities.
+                        Get ready to dive into the fascinating world of quantum computing with hands-on sessions, expert
+                        talks, and networking opportunities!
+                        This event is designed to provide an interactive and engaging experience for all participants.
+                    </p>
+
+                    <img src="images/IBM_cat.svg" alt="IBM Cat" class="nav-logo ms-2" style="height: 100px;">
+
+                    <a href="#schedule" class="btn btn-register-main btn-lg">View Schedule</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section id="committee" class="text-center">
+            <div class="container">
+                <h2>Our Committee</h2>
+
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <a href="https://www.linkedin.com/in/muratbaranpolat/" target="_blank"
+                            class="committee-card-link">
+                            <div class="committee-card">
+                                <img src="images/Baran_IBM.jpeg" alt="Chief Organiser Photo" class="committee-img">
+
+                                <div class="linkedin-overlay">
+                                    <i class="bi bi-linkedin"></i>
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Murat Baran Polat</h5>
+                                    <p class="card-role">Chief Organiser</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center mt-5">
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <a href="https://www.linkedin.com/in/fatima-kazmi-694346245/" target="_blank"
+                            class="committee-card-link">
+                            <div class="committee-card">
+                                <img src="https://media.licdn.com/dms/image/v2/D4E03AQH_9T_KFoeIFA/profile-displayphoto-shrink_800_800/B4EZVXI3UOHgAc-/0/1740923697077?e=1762387200&v=beta&t=PJG7wifwKtZm2XqtQgIc_VCLa3I9tHu79N8pUj9JoF0"
+                                    alt="Organiser Photo" class="committee-img">
+
+                                <div class="linkedin-overlay">
+                                    <i class="bi bi-linkedin"></i>
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Fatima Kazmi</h5>
+                                    <p class="card-role">Organiser</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <a href="https://www.linkedin.com/in/yiqiong-shi-212ab5296/" target="_blank"
+                            class="committee-card-link">
+                            <div class="committee-card">
+                                <img src="images/Bonnie.jpeg" alt="Organiser Photo" class="committee-img">
+
+                                <div class="linkedin-overlay">
+                                    <i class="bi bi-linkedin"></i>
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Yiqiong Shi</h5>
+                                    <p class="card-role">Organiser</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <a href="https://www.linkedin.com/in/fares-sawalhi-a60556384/" target="_blank"
+                            class="committee-card-link">
+                            <div class="committee-card">
+                                <img src="images/Fares.jpeg" alt="Organiser Photo" class="committee-img">
+
+                                <div class="linkedin-overlay">
+                                    <i class="bi bi-linkedin"></i>
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Fares Sawalhi</h5>
+                                    <p class="card-role">Organiser</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <a href="https://www.linkedin.com/in/stanley-clark-b137b7333/" target="_blank"
+                            class="committee-card-link">
+                            <div class="committee-card">
+                                <img src="images/Stanley.jpeg" alt="Organiser Photo" class="committee-img">
+
+                                <div class="linkedin-overlay">
+                                    <i class="bi bi-linkedin"></i>
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Stanley Clark</h5>
+                                    <p class="card-role">Organiser</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section id="schedule" class="text-center" style="position: relative;">
+
+            <!--<div class="schedule-overlay">
+                <h3>Schedule Coming Soon!</h3>
+                <p>Details will be announced shortly.</p>
+            </div>-->
+
+            <div class="container">
+                <h2>Event Schedule</h2>
+
+                <div class="row mt-5">
+
+                    <div class="col-12 col-7 col-4">
+                        <h3>Day 0: October 31, 2025</h3>
+                        <div class="schedule-list">
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">11:00 - 17:00</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">In-Person Lab Tours!</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="schedule-divider">
+                    </div>
+
+                    <div class="col-md-6 schedule-day-column">
+                        <h3>Day 1: November 1, 2025</h3>
+                        <div class="schedule-list">
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">09:30 - 09:45</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">Registration & Welcome</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="schedule-divider">
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">09.45 - 11:30</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">Sasha Lazarevic - "Quantum and Qiskit 101 Seminar"
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="schedule-divider">
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">11:30 - 11:35</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">Break</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="schedule-divider">
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">11:35 - 12:30</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">Martin Weides - "Quantum Computing using
+                                            Superconductors"</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="schedule-divider">
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">12:30 - 13:30</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">Break</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="schedule-divider">
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">13:30 - 14:30</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">Hiu Yung Wong - "An Overview of Quantum Computing
+                                            Hardware"</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="schedule-divider">
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">14:30 - Onwards</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">Qiskit Workshop and Live Coding</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="schedule-divider">
+                        </div>
+                    </div>
+                    <div class="col-md-6 schedule-day-column">
+                        <h3>Day 2: November 2, 2025</h3>
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">10:00 - 11:00</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">Abuzer Yakaryilmaz - "My Journey in Quantum
+                                            Education"</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="schedule-divider">
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">11:00 - 11:15</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">Break</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="schedule-divider">
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">11:15 - 12:30</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">Jim McKay - "IBM Quantum Roadmap & Implications of Quantum on Encryption"</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="schedule-divider">
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">12:30 - 13:30</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">Break</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="schedule-divider">
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">13:30 - 15:00</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">Qiskit Workshop and Quiz</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="schedule-divider">
+                            <div class="schedule-item">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-4">
+                                        <p class="schedule-time">15:00 - 15:30</p>
+                                    </div>
+                                    <div class="col-lg-8 text-lg-start">
+                                        <h5 class="schedule-title">Awards and Farewells</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="schedule-divider">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="speakers" class="py-5">
+            <div class="container text-center">
+                <h2>Confirmed Speakers</h2>
+
+                <div class="row justify-content-center">
+
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="speaker-card">
+                            <div class="speaker-img-container">
+                                <img src="https://www.gla.ac.uk/media/Media_567991_smxx.jpg" alt="Speaker Name"
+                                    class="speaker-img">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="speaker-name">Prof. Martin Weides</h5>
+                                <p class="speaker-title">Professor and Chair of Quantum Technologies (Electronic &
+                                    Nanoscale
+                                    Engineering) </p>
+                                <p class="speaker-title">Director (James Watt Nanofabrication Centre) </p>
+                                <p class="speaker-bio">Dr Martin Weides is a Professor of Quantum Technologies at the
+                                    University of Glasgow, where he serves as Director of the James Watt Nanofabrication
+                                    Centre and leads the Quantum Circuits group. An expert in experimental solid-state
+                                    physics at the interface with material science, his research focuses on coherent
+                                    nanoelectronics, quantum spintronics, and quantum computing with superconducting
+                                    circuits. After receiving his PhD from the University of Cologne, he held
+                                    postdoctoral positions at NIST and UCSB before joining Glasgow in 2018. A recipient
+                                    of grants from the ERC and the Alexander von Humboldt Foundation, Dr Weides is a
+                                    Fellow of the Institute of Physics, serves on the editorial board of Applied Physics
+                                    Letters, and has published over 100 peer-reviewed papers.</p>
+                                <div class="speaker-links mt-3">
+                                    <a href="https://orcid.org/0000-0002-2718-6795" target="_blank"
+                                        class="speaker-link-btn me-2">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/ORCID_iD.svg/2048px-ORCID_iD.svg.png"
+                                            alt="ORCID" class="link-logo"> ORCID
+                                    </a>
+                                    <a href="https://www.gla.ac.uk/schools/engineering/staff/martinweides/"
+                                        target="_blank" class="speaker-link-btn">
+                                        <img src="images/UoG_keyline.png" alt="University" class="link-logo">
+                                        University
+                                    </a>
+                                    <a href="https://scholar.google.com/citations?user=Vw3VFYcAAAAJ&hl=en"
+                                        target="_blank" class="speaker-link-btn">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Google_Scholar_logo.svg/1200px-Google_Scholar_logo.svg.png"
+                                            alt="Google Scholar" class="link-logo">
+                                        Google Scholar
+                                    </a>
+                                    <a href="https://www.researchgate.net/profile/Martin-Weides" target="_blank"
+                                        class="speaker-link-btn me-2">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/ResearchGate_icon_SVG.svg/2048px-ResearchGate_icon_SVG.svg.png"
+                                            alt="ResearchGate" class="link-logo"> ResearchGate
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="speaker-card">
+                            <div class="speaker-img-container">
+                                <img src="https://www.sjsu.edu/people/hiuyung.wong/pics/Hiu-Wong.jpg" alt="Speaker Name"
+                                    class="speaker-img">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="speaker-name">Prof. Hiu Yung Wong</h5>
+                                <p class="speaker-title">Professor of Electrical Engineering at San Jose State
+                                    University</p>
+                                <p class="speaker-title">Silicon Valley AMDT Endowed Chair in Electrical Engineering</p>
+                                <p class="speaker-bio">Hiu Yung Wong is a Professor at San Jose State University,
+                                    bringing over 12 years of industry experience from Synopsys and Spansion to his
+                                    academic role. A Ph.D. graduate from UC Berkeley, his work on quantum computing,
+                                    machine learning, and device simulation has earned him major awards, including the
+                                    NSF CAREER award (2021) and the AMDT Endowed Chair (2022). In addition to his
+                                    research and authoring two books, he is a founding member of SJSU's M.S. in Quantum
+                                    Technology program and actively serves the scientific community as Chair of the IEEE
+                                    EDS-SCV and for international conferences like SISPAD. </p>
+                                <div class="speaker-links mt-3">
+                                    <a href="https://orcid.org/0000-0003-0135-7469" target="_blank"
+                                        class="speaker-link-btn me-2">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/ORCID_iD.svg/2048px-ORCID_iD.svg.png"
+                                            alt="ORCID" class="link-logo"> ORCID
+                                    </a>
+                                    <a href="https://www.sjsu.edu/people/hiuyung.wong/" target="_blank"
+                                        class="speaker-link-btn">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/San_Jose_State_University_logo.svg/1280px-San_Jose_State_University_logo.svg.png"
+                                            alt="University" class="link-logo">
+                                        University
+                                    </a>
+                                    </a>
+                                    <a href="https://scholar.google.com/citations?user=qfKqIBAAAAAJ&hl=en"
+                                        target="_blank" class="speaker-link-btn">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Google_Scholar_logo.svg/1200px-Google_Scholar_logo.svg.png"
+                                            alt="Google Scholar" class="link-logo">
+                                        Google Scholar
+                                    </a>
+                                    <a href="https://www.researchgate.net/scientific-contributions/Hiu-Yung-Wong-2095566687"
+                                        target="_blank" class="speaker-link-btn me-2">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/ResearchGate_icon_SVG.svg/2048px-ResearchGate_icon_SVG.svg.png"
+                                            alt="ResearchGate" class="link-logo"> ResearchGate
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="speaker-card">
+                            <div class="speaker-img-container">
+                                <img src="https://sites.utu.fi/quantum-future/wp-content/uploads/sites/548/2020/06/abuzer3-300x273-1.jpg"
+                                    alt="Speaker Name" class="speaker-img">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="speaker-name">Dr. Abuzer Yakaryilmaz</h5>
+                                <p class="speaker-title">Assistant Professor at the University of Latvia</p>
+                                <p class="speaker-title">Co-Founder of QWorld Association (QWorld)</p>
+                                <p class="speaker-bio">Dr Abuzer Yakaryilmaz is an Assistant Professor and researcher at
+                                    the University of Latvia, having received his PhD from Bogazici University in 2011.
+                                    Following postdoctoral work in Latvia and Brazil, his research now combines quantum
+                                    automata and complexity theory with a strong focus on quantum technology education
+                                    and popularisation. He is the founder of QWorld, a global
+                                    non-profit association dedicated to training the next generation of quantum
+                                    scientists through education and skill development. Since 2018, he has focused
+                                    significantly on the popularisation of quantum technologies, designing and leading
+                                    multiple international educational projects, including the European "Quantum Drive"
+                                    tour. </p>
+                                <div class="speaker-links mt-3">
+                                    <a href="" target="_blank" class="speaker-link-btn me-2">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/ORCID_iD.svg/2048px-ORCID_iD.svg.png"
+                                            alt="ORCID" class="link-logo"> ORCID
+                                    </a>
+                                    <a href="https://www.sjsu.edu/people/hiuyung.wong/" target="_blank"
+                                        class="speaker-link-btn">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/San_Jose_State_University_logo.svg/1280px-San_Jose_State_University_logo.svg.png"
+                                            alt="University" class="link-logo">
+                                        University
+                                    </a>
+                                    </a>
+                                    <a href="https://scholar.google.com/citations?user=nHzCrIEAAAAJ&hl=en"
+                                        target="_blank" class="speaker-link-btn">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Google_Scholar_logo.svg/1200px-Google_Scholar_logo.svg.png"
+                                            alt="Google Scholar" class="link-logo">
+                                        Google Scholar
+                                    </a>
+                                    <a href="https://www.researchgate.net/profile/Abuzer-Yakaryilmaz" target="_blank"
+                                        class="speaker-link-btn me-2">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/ResearchGate_icon_SVG.svg/2048px-ResearchGate_icon_SVG.svg.png"
+                                            alt="ResearchGate" class="link-logo"> ResearchGate
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="speaker-card">
+                            <div class="speaker-img-container">
+                                <img src="https://media.licdn.com/dms/image/v2/D4E03AQFl5XB31_UWXA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1708936478294?e=1763596800&v=beta&t=0yxumgcCBe2g0m-v3EJJ4XYUcGTwfEChJyaZfiGhAK8"
+                                    alt="Speaker Name" class="speaker-img">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="speaker-name">Sasha Lazarevic</h5>
+                                <p class="speaker-title">IBM Senior AI Architect </p>
+                                <p class="speaker-title">IBM Quantum Ambassador</p>
+                                <p class="speaker-bio">Sasha Lazarevic is a technology leader at IBM with over 23 years
+                                    of experience, currently serving as a Watsonx Data and AI Architect. He is also a
+                                    long-standing IBM Quantum Ambassador and Qiskit Advocate, specialising in quantum
+                                    algorithms, quantum machine learning, and quantum finance. His deep expertise in AI,
+                                    data science, and cloud computing is built upon previous senior roles in technical
+                                    solution management and project management. Mr Lazarevic holds an MSc in Management
+                                    of Information Systems from the University of Belgrade, an MBA from Business School
+                                    Lausanne, and an AI Graduate Certificate from Stanford University. </p>
+                                <div class="speaker-links mt-3">
+                                    <a href="https://www.linkedin.com/in/lzrvc/?originalSubdomain=ch" target="_blank"
+                                        class="speaker-link-btn">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/1024px-LinkedIn_icon.svg.png"
+                                            alt="LinkedIn" class="link-logo">
+                                        LinkedIn
+                                    </a>
+
+                                    <a href="https://lzrvc.com/sasha-lazarevic/" target="_blank"
+                                        class="speaker-link-btn">
+                                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAIAAAD9b0jDAAACb0lEQVR4Aa2UQ5hcURBG737WsY1NbNu2bY89q5ir2LZtO9nFtm3enE7Nu3mN12n9Xy2q7td9uthKi7580bduG3OFDvrw/fPt9498mrZkQd+80cVLaqVcliOXfv7cCbr93lG1srTLNjVXW9q6bG0Nl62u6AVFJ05kQvft087a//AMxI13D0m47MZOtaERhhMWlBxNK8hRUiYMHOpPGRfnkiNcehIZ6LMvryXN0rv7E0YGOuDkOIhwz724HBkoCyRptjqUQBgk9PnzbzZpS7AkTejBQR/s2qW8VK1S1Rnr58oa0QH5JB34354ePqxFPXoOsVjykJaWJmHUtHpAWSl573I0nay9oNxli5aZ0HLl8bkr/FgbVKREbQtQPiz6wPRJE/NxplRNjmLik3t0p04+oZ2H9OQKPMwG9auYmAQ79OHDhxIe2L9fOylwKJSNGzcWLFgQf/LkyVrkF3pS66Ja18VwCOWy8aNj8gu0V69expFvHjj1qcXQp6rkPZXnrqr1AP/py58emU7A/2s4Riejo/8N6vz58+LHxQ4fN/cLuIItHl678x1W/9TnoPE9oB8s6Bgb9KAditq0aaNElU8CNRS4PqGoqMU16uEBNclG5etOmoEMynTgpvmZfPmUCJw8cVHy0n3w4kCgsAS6SGrfsUNNtsmWbLzKn1axdjT/BoGslEDrSu0u85C0j4mXv8+sAtzTMRZX5nZSe4nsgLJDsRNfBgg9aEF7+LmLrI0fAq3e67FHBQ5QSdAsrIMonPIxA7r3+IdSt32ulKiuBb2rncU+ASVZQBA5J6c9FS0ys/KvWSvfAgUtraDF9jONvP4AqQJJlo7WH4YAAAAASUVORK5CYII="
+                                            alt="Blog" class="link-logo">
+                                        Blog
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="speaker-card">
+                            <div class="speaker-img-container">
+                                <img src="https://media.licdn.com/dms/image/v2/C4D03AQEI1p6PLsuzmw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1569323670825?e=1762992000&v=beta&t=uvOWtB74g0U3vbrDkkGFk5L4Erj5yVvzi-J62ZpEN0Y"
+                                    alt="Speaker Name" class="speaker-img">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="speaker-name">Jim McKay</h5>
+                                <p class="speaker-title">IBM Cloud Solutions Architect</p>
+                                <p class="speaker-bio"> Jim McKay is a Solution Architect at IBM Cloud with over 24
+                                    years of experience at the company. He is a subject matter expert in cloud
+                                    computing, specialising in designing innovative solutions for high-priority global
+                                    clients and translating complex enterprise architectures to the cloud while meeting
+                                    security and regulatory requirements. </p>
+                                <div class="speaker-links mt-3">
+                                    <a href="https://www.linkedin.com/in/jim-mckay-0a57151b/?originalSubdomain=uk"
+                                        target="_blank" class="speaker-link-btn">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/1024px-LinkedIn_icon.svg.png"
+                                            alt="LinkedIn" class="link-logo">
+                                        LinkedIn
+                                    </a>
+
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="sponsors" class="py-5">
+            <div class="container text-center">
+                <h2>Our Sponsors</h2>
+                <div class="scroller mt-5">
+                    <div class="scroller-inner">
+
+                        <a href="https://www.ibm.com/quantum" target="_blank" class="committee-card-link">
+                            <img src="images/IBM_Quantum.png" alt="Sponsor One Logo">
+                        </a>
+                        <a href="https://www.gla.ac.uk/" target="_blank" class="committee-card-link">
+                            <img src="images/UoG_keyline.png" alt="Sponsor Two Logo">
+                        </a>
+                        <a href="https://www.gla.ac.uk/research/az/quantumtechnology/" target="_blank"
+                            class="committee-card-link">
+                            <img src="https://pbs.twimg.com/profile_images/1420427335359156224/yR6y5nyg_400x400.jpg"
+                                alt="Sponsor Three Logo">
+                        </a>
+                        </a>
+                        <a href="https://quantcore.co.uk/" target="_blank" class="committee-card-link">
+                            <img src="images/Quantcore_Logo_White.png" alt="Sponsor Four Logo">
+                        </a>
+                        <a href="https://www.ibm.com/uk-en" target="_blank" class="committee-card-link">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/1280px-IBM_logo.svg.png"
+                                alt="Sponsor Five Logo">
+                        </a>
+
+
+                        <a href="https://www.ibm.com/quantum" target="_blank" class="committee-card-link">
+                            <img src="images/IBM_Quantum.png" alt="Sponsor One Logo">
+                        </a>
+                        <a href="https://www.gla.ac.uk/" target="_blank" class="committee-card-link">
+                            <img src="images/UoG_keyline.png" alt="Sponsor Two Logo">
+                        </a>
+                        <a href="https://www.gla.ac.uk/research/az/quantumtechnology/" target="_blank"
+                            class="committee-card-link">
+                            <img src="https://pbs.twimg.com/profile_images/1420427335359156224/yR6y5nyg_400x400.jpg"
+                                alt="Sponsor Three Logo">
+                        </a>
+                        <a href="https://quantcore.co.uk/" target="_blank" class="committee-card-link">
+                            <img src="images/Quantcore_Logo_Black.png" alt="Sponsor Four Logo">
+                        </a>
+                        <a href="https://www.ibm.com/uk-en" target="_blank" class="committee-card-link">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/1280px-IBM_logo.svg.png"
+                                alt="Sponsor Five Logo">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section id="venue">
+        <div class="container">
+            <div class="text-center">
+                <h2>Venue & Location</h2>
+            </div>
+
+            <div class="row align-items-center mt-5">
+                <div class="col-md-6 text-center text-md-start">
+                    <div class="venue-details">
+                        <h3>Sir Alwyn Williams Building Room 422</h3>
+                        <p class="venue-address">
+                            University of Glasgow<br>
+                            18 Lilybank Gardens<br>
+                            Glasgow, G12 8RZ<br>
+                            Scotland
+                        <h3>Boyd Orr BO720 Lab</h3>
+                        <p class="venue-address">
+                            University of Glasgow<br>
+                            University Ave, 
+                            Glasgow G12 8SP<br>
+                            Scotland
+                        </p>
+                        <a href="https://www.gla.ac.uk/explore/maps/" target="_blank"
+                            class="btn btn-outline-light mt-3">View Campus Maps</a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-4 mt-md-0">
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2238.740203023067!2d-4.29202792370781!3d55.87244588147773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x488845cfca541953%3A0x3562b23c4365751a!2sSir%20Alwyn%20Williams%20Building!5e0!3m2!1sen!2suk!4v1728512148719!5m2!1sen!2suk"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center text-md-start mb-4">
+                    <h5>University of Glasgow Qiskit Fall Fest</h5>
+                    <img src="images/UoG_keyline.png" alt="University Logo" class="nav-logo">
+                    <img src="images/Qiskit.svg" alt="IBM Logo" class="nav-logo ms-2" style="height: 100px;">
+
+                    <p class="text-muted small">© 2025 Organising Committee. All Rights Reserved.</p>
+                </div>
+
+                <div class="col-md-4 text-center mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#committee" class="footer-link">Committee</a></li>
+                        <li><a href="#schedule" class="footer-link">Schedule</a></li>
+                        <li><a href="#venue" class="footer-link">Venue</a></li>
+                        <li><a href="#sponsors" class="footer-link">Sponsors</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 text-center text-md-end mb-4">
+                    <h5>Contact Us</h5>
+                    <a href="mailto:2950172p@student.gla.ac.uk" class="footer-link d-block mb-3">
+                        <i class="bi bi-envelope-fill"></i> 2950172p@student.gla.ac.uk
+                    </a>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/gu_ibmfest25?igsh=MXVxZTl2NW55aWwyMQ=="
+                            class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/university-of-glasgow-ibm-qiskit-fall-fest-2025/"
+                            class="social-icon"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#hero" class="back-to-top d-flex align-items-center justify-content-center">
+        <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" ...></script>
+
+    <script>
+        // Wait for the document to be fully loaded
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Find the button and the menu
+            var toggler = document.getElementById('navbar-toggler-button');
+            var collapseMenu = document.getElementById('navbarNav');
+
+            // Create a Bootstrap Collapse instance
+            var bsCollapse = new bootstrap.Collapse(collapseMenu, {
+                toggle: false // Initialize it as closed
+            });
+
+            // Add a click event listener to the button
+            toggler.addEventListener('click', function () {
+                bsCollapse.toggle(); // Manually toggle the menu
+            });
+        });
+    </script>
+
+</body>
+
+
+
+
+</html>
+
+
+
+
+
+
