@@ -169,9 +169,16 @@
         }
 
         /* Fix: logos were overlapping the nav links on medium screens, so hide the title text there */
-        @media (min-width: 992px) and (max-width: 1199.98px) {
+        @media (min-width: 992px) and (max-width: 1399.98px) {
             .navbar-brand span {
                 display: none;
+            }
+        }
+
+        /* Stop the nav links hitting the logos */
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            .navbar {
+                --bs-navbar-nav-link-padding-x: 0.3rem;
             }
         }
 
@@ -582,6 +589,29 @@
             margin: 0;
         }
 
+        /* Recordings */
+        .recording-card {
+            background-color: var(--card-dark);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border-dark);
+        }
+
+        .recording-card .card-body {
+            padding: 1.25rem 1.5rem;
+        }
+
+        .recording-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .recording-speaker {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
         /* Map Container */
         .map-container {
             border-radius: 15px;
@@ -716,6 +746,9 @@
                         <a class="nav-link" href="#schedule">Schedule</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#recordings">Recordings</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#sponsors">Sponsors</a>
                     </li>
                     <li class="nav-item">
@@ -768,6 +801,7 @@
                 <a href="https://teams.microsoft.com/l/meetup-join/19:meeting_ZWU1NzQxZjItOTU3OS00ODk1LWI3MmItZTQwYjA0MDU4OGNj@thread.v2/0?context=%7B%22Tid%22:%226e725c29-763a-4f50-81f2-2e254f0133c8%22,%22Oid%22:%22acb8c488-79f2-480e-bd97-e40bcfb20335%22%7D"
                     target="_blank" rel="noopener noreferrer" class="btn btn-register-main btn-lg px-4 py-3 m-1">Join
                     Online (Teams)</a>
+                <a href="#recordings" class="btn btn-register btn-lg px-4 py-3 m-1">Watch the Recordings</a>
             </p>
         </div>
     </header>
@@ -1427,6 +1461,93 @@
             </div>
         </section>
 
+        <!-- RECORDINGS -->
+        <section id="recordings" class="py-5">
+            <div class="container text-center">
+                <h2>Session Recordings</h2>
+                <p class="text-white-50 mb-5">Recordings of the workshop and talks from October&nbsp;24,&nbsp;2026.</p>
+
+                <div class="row justify-content-center g-4">
+
+                    <!-- Julia Santos -->
+                    <div class="col-12 col-lg-8">
+                        <div class="recording-card">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://www.youtube-nocookie.com/embed/_mq9phddQyA?rel=0"
+                                    title="Qiskit 101 and Hands-on Workshop, Julia Santos" loading="lazy"
+                                    allow="encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body text-start">
+                                <h3 class="recording-title">Qiskit 101 and Hands-on Workshop</h3>
+                                <p class="recording-speaker">Julia Santos</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sarah Croke -->
+                    <div class="col-12 col-lg-8">
+                        <div class="recording-card">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://www.youtube-nocookie.com/embed/Va50cNZCh0w?rel=0"
+                                    title="Quantum Algorithms for Gravitational Wave Astronomy, Sarah Croke" loading="lazy"
+                                    allow="encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body text-start">
+                                <h3 class="recording-title">Quantum Algorithms for Gravitational Wave Astronomy</h3>
+                                <p class="recording-speaker">Sarah Croke</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ashley Lyons -->
+                    <div class="col-12 col-lg-8">
+                        <div class="recording-card">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://www.youtube-nocookie.com/embed/Sx4afeMUwok?rel=0"
+                                    title="Optical Quantum Imaging, Ashley Lyons" loading="lazy"
+                                    allow="encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body text-start">
+                                <h3 class="recording-title">Optical Quantum Imaging</h3>
+                                <p class="recording-speaker">Ashley Lyons</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mingqi Zhang -->
+                    <div class="col-12 col-lg-8">
+                        <div class="recording-card">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://www.youtube-nocookie.com/embed/kQe9ZrksgPY?rel=0"
+                                    title="Wireless Quantum Communication with Chip-Scale Light Sources, Mingqi Zhang" loading="lazy"
+                                    allow="encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body text-start">
+                                <h3 class="recording-title">Wireless Quantum Communication with Chip-Scale Light Sources</h3>
+                                <p class="recording-speaker">Mingqi Zhang</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kiran Kaur Raina -->
+                    <div class="col-12 col-lg-8">
+                        <div class="recording-card">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://www.youtube-nocookie.com/embed/fBQTX6cKl28?rel=0"
+                                    title="Quantum Reality: Security and Education, Kiran Kaur Raina" loading="lazy"
+                                    allow="encrypted-media; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div>
+                            <div class="card-body text-start">
+                                <h3 class="recording-title">Quantum Reality: Security and Education</h3>
+                                <p class="recording-speaker">Kiran Kaur Raina</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
         <!-- PREVIOUS EVENTS -->
         <section id="previous-events" class="py-5"
             style="background-color: rgba(20, 22, 33, 0.5); border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark);">
@@ -1591,6 +1712,7 @@
                         <li class="mb-2"><a href="#committee" class="footer-link">Committee</a></li>
                         <li class="mb-2"><a href="#speakers" class="footer-link">Speakers</a></li>
                         <li class="mb-2"><a href="#schedule" class="footer-link">Schedule</a></li>
+                        <li class="mb-2"><a href="#recordings" class="footer-link">Recordings</a></li>
                         <li class="mb-2"><a href="#previous-events" class="footer-link">Previous Events</a></li>
                         <li class="mb-2"><a href="#sponsors" class="footer-link">Sponsors</a></li>
                         <li class="mb-2"><a href="#venue" class="footer-link">Venue</a></li>
